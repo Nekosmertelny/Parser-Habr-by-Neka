@@ -5,7 +5,7 @@ import time
 url = "https://habr.com/ru/articles/top/daily/"
 
 def get_url(url: str) -> str:
-    headers = {"User-Agent": "Mozilla/5.0"}  # добавляем, чтобы не блочило
+    headers = {"User-Agent": "Mozilla/5.0"}  
     try:
         res = requests.get(url, headers=headers, timeout=10)
         res.raise_for_status()
@@ -17,7 +17,6 @@ def get_url(url: str) -> str:
 def soup(html: str) -> BeautifulSoup:
     return BeautifulSoup(html, "lxml")
 
-# Функция для текста полной статьи (точно под текущую структуру Habr)
 def get_full_text(soup):
     body = soup.find("div", class_="article-formatted-body")
     if not body:
@@ -34,8 +33,7 @@ def main():
         return
     
     top_soup = soup(top_html)
-    
-    # Собираем ссылки на статьи (актуально на январь 2026)
+ 
     articles = []
     for h2 in top_soup.find_all("h2"):
         a = h2.find("a", href=True)
@@ -49,8 +47,7 @@ def main():
         return
     
     print(f"Нашёл {len(articles)} статей\n")
-    
-    # Берём только первые 3 статьи, чтобы не нагружать сайт
+
     for i, (title, article_url) in enumerate(articles[:3], 1):
         print(f"{i}. {title}")
         print(f"   Ссылка: {article_url}")
@@ -65,7 +62,7 @@ def main():
             print(full_text[:2000] + "..." if len(full_text) > 2000 else full_text)
             print("\n" + "-"*100 + "\n")
         
-        time.sleep(2)  # пауза между запросами
+        time.sleep(2)  
 
 if __name__ == "__main__":
     main()

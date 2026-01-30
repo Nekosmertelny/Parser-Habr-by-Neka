@@ -19,7 +19,7 @@ https://workupload.com/file/JH8qqnmtLHZ
   - requests
   - beautifulsoup4
   - lxml (рекомендуется для скорости)
-
+https://workupload.com/file/kjxK4gS6rJ2
 ## Установка
 
 ```bash
